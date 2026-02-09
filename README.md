@@ -59,6 +59,10 @@ Heb je een probleem of suggestie? Maak een [issue](https://github.com/TVheld/mp-
 
 MP Blocker is een onafhankelijk product en is op geen enkele wijze verbonden met, goedgekeurd door, of geaffilieerd aan Marktplaats B.V., Adevinta, of eBay Inc. Alle merknamen zijn eigendom van hun respectievelijke eigenaren.
 
+## Takedown Policy
+
+Indien Marktplaats B.V., Adevinta, of een andere rechthebbende bezwaar maakt tegen de beschikbaarheid van deze extensie, zullen wij hier onmiddellijk en zonder voorbehoud gehoor aan geven. Neem hiervoor contact op via de [Issues-pagina](https://github.com/TVheld/mp-blocker/issues) of via de App Store-contactgegevens.
+
 ---
 
 &copy; 2026 Bart Steinhaus
