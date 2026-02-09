@@ -4,12 +4,22 @@
 
 MP Blocker filtert automatisch advertenties van commerciele handelaren en webshops uit de zoekresultaten op Marktplaats.nl, zodat je alleen advertenties van particuliere verkopers ziet.
 
+**[Download via TestFlight](https://testflight.apple.com/join/5khqgWcY)**
+
 ## Functies
 
 - Verbergt automatisch commerciele advertenties in zoekresultaten
 - Toont alleen advertenties van particuliere verkopers
 - Werkt direct in Safari zonder configuratie
 - Beschikbaar voor macOS en iOS
+
+## Installatie
+
+1. Download MP Blocker via [TestFlight](https://testflight.apple.com/join/5khqgWcY)
+2. Open de app en volg de instructies
+3. Activeer de extensie:
+   - **macOS**: Safari > Instellingen > Extensies > MP Blocker
+   - **iOS**: Instellingen > Apps > Safari > Extensies > MP Blocker
 
 ## Privacy
 
@@ -21,15 +31,14 @@ MP Blocker respecteert je privacy volledig:
 - Geen cookies, analytics of tracking
 - Geen netwerkverzoeken
 
-De enige gegevens die lokaal worden opgeslagen zijn je voorkeursinstellingen.
+De enige gegevens die lokaal worden opgeslagen zijn je voorkeursinstellingen. MP Blocker verwerkt geen persoonsgegevens in de zin van de Algemene Verordening Gegevensbescherming (AVG/GDPR). Er worden geen cookies geplaatst, geen gebruikersprofielen aangemaakt, en geen gegevens gedeeld met derden.
 
-## Installatie
+## Gebruiksvoorwaarden
 
-1. Download MP Blocker uit de [App Store](#)
-2. Open de app en volg de instructies
-3. Activeer de extensie:
-   - **macOS**: Safari > Instellingen > Extensies > MP Blocker
-   - **iOS**: Instellingen > Apps > Safari > Extensies > MP Blocker
+- De extensie wordt aangeboden "as is", zonder enige garantie van beschikbaarheid, nauwkeurigheid of geschiktheid voor een bepaald doel.
+- De ontwikkelaar is niet aansprakelijk voor directe, indirecte, incidentele of gevolgschade voortvloeiend uit het gebruik van de extensie.
+- De extensie wijzigt uitsluitend de visuele weergave van webpagina's in jouw browser. Onderliggende data of functionaliteit van websites wordt niet aangetast.
+- Websites kunnen hun structuur wijzigen waardoor de extensie tijdelijk niet of niet volledig functioneert.
 
 ## Veelgestelde vragen
 

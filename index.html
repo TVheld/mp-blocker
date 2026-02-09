@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP Blocker - Zie alleen wat echt is</title>
+    <meta name="description" content="MP Blocker verbergt commerciele advertenties op Marktplaats.nl. Zie alleen advertenties van echte particulieren.">
+    <meta property="og:title" content="MP Blocker - Zie alleen wat echt is">
+    <meta property="og:description" content="Safari-extensie die commerciele advertenties verbergt op Marktplaats.nl">
+    <meta property="og:type" content="website">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --accent: #3B82F6;
+            --accent-dark: #2563EB;
+            --green: #22C55E;
+            --red: #EF4444;
+            --text: #0F172A;
+            --text-secondary: #64748B;
+            --bg: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --border: #E2E8F0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text: #F1F5F9;
+                --text-secondary: #94A3B8;
+                --bg: #0F172A;
+                --bg-secondary: #1E293B;
+                --border: #334155;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 24px 60px;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg) 100%);
+        }
+
+        .hero-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 28px;
+            background: linear-gradient(145deg, var(--accent), var(--accent-dark));
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.3);
+        }
+
+        .hero-icon svg {
+            width: 64px;
+            height: 64px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 8px;
+        }
+
+        .tagline {
+            font-size: 22px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin: 0 auto 32px;
+        }
+
+        .badges {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .badge svg { width: 16px; height: 16px; }
+
+        .cta-buttons {
+            margin-top: 36px;
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .btn:hover { transform: translateY(-2px); }
+
+        .btn-primary {
+            background: linear-gradient(145deg, var(--accent), var(--accent-dark));
+            color: white;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover { box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4); }
+
+        .btn svg { width: 20px; height: 20px; }
+
+        /* Sections */
+        .section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            font-size: 17px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Problem */
+        .problem {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 600px) {
+            .problem-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 36px; }
+        }
+
+        .problem-card {
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+        }
+
+        .problem-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .problem-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .icon-red { color: var(--red); }
+        .icon-green { color: var(--green); }
+
+        /* How it works */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 24px;
+            border-radius: 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(145deg, var(--accent), var(--accent-dark));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .step h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .step p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .features-grid { grid-template-columns: 1fr; }
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 28px 20px;
+            border-radius: 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(145deg, var(--accent), var(--accent-dark));
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+        }
+
+        .feature-icon svg { width: 24px; height: 24px; }
+
+        .feature-card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .feature-card p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Privacy */
+        .privacy {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .privacy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .privacy-grid { grid-template-columns: 1fr; }
+        }
+
+        .privacy-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            border-radius: 12px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        .check {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            padding: 80px 24px;
+        }
+
+        .cta-section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+            font-size: 17px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 32px 24px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        footer a { color: var(--accent); text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+    </div>
+    <h1>MP Blocker</h1>
+    <p class="tagline">Zie alleen wat echt is</p>
+    <p class="hero-desc">Safari-extensie die commerciele advertenties verbergt op Marktplaats.nl, zodat je alleen advertenties van echte particulieren ziet.</p>
+    <div class="badges">
+        <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            macOS
+        </span>
+        <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            iPhone &amp; iPad
+        </span>
+        <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            Safari Extensie
+        </span>
+        <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            100% Gratis
+        </span>
+    </div>
+    <div class="cta-buttons">
+        <a href="https://testflight.apple.com/join/5khqgWcY" class="btn btn-primary" id="download-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Download via TestFlight
+        </a>
+    </div>
+</section>
+
+<!-- Problem -->
+<section class="problem">
+    <div class="section">
+        <h2 class="section-title">Het probleem</h2>
+        <p class="section-subtitle">Zoek je op Marktplaats naar een tweedehands product? Dan zie je dit:</p>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <h3><span class="icon-red">&#10007;</span> Zonder MP Blocker</h3>
+                <p>Zoekresultaten vol met advertenties van commerciele webshops zoals Catawiki, reBuy en andere handelaren. Je moet zelf uitzoeken welke advertenties echt zijn.</p>
+            </div>
+            <div class="problem-card">
+                <h3><span class="icon-green">&#10003;</span> Met MP Blocker</h3>
+                <p>Alleen advertenties van echte particulieren. Geen webshops, geen commerciele rommel. Direct vinden wat je zoekt van echte mensen.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How it works -->
+<section class="section">
+    <h2 class="section-title">Zo werkt het</h2>
+    <p class="section-subtitle">In drie simpele stappen actief</p>
+    <div class="steps">
+        <div class="step">
+            <div class="step-number">1</div>
+            <div>
+                <h3>Download MP Blocker</h3>
+                <p>Gratis beschikbaar in de App Store voor iPhone, iPad en Mac.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div>
+                <h3>Activeer de extensie</h3>
+                <p><strong>Mac:</strong> Safari &rsaquo; Instellingen &rsaquo; Extensies &rsaquo; MP Blocker<br><strong>iPhone:</strong> Instellingen &rsaquo; Apps &rsaquo; Safari &rsaquo; Extensies &rsaquo; MP Blocker</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <div>
+                <h3>Zoek op Marktplaats</h3>
+                <p>Commerciele advertenties worden automatisch verborgen. Klaar!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section class="privacy">
+    <div class="section">
+        <h2 class="section-title">Waarom MP Blocker?</h2>
+        <p class="section-subtitle">Simpel, snel en veilig</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M9 9l6 6m0-6l-6 6"/></svg>
+                </div>
+                <h3>Blokkeert webshops</h3>
+                <p>Commerciele advertenties worden automatisch herkend en verborgen.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <h3>Alleen particulieren</h3>
+                <p>Zie alleen advertenties van echte mensen, geen handelaren.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <h3>Werkt direct</h3>
+                <p>Geen configuratie nodig. Installeer, activeer, klaar.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Privacy -->
+<section class="section">
+    <h2 class="section-title">100% Privacy</h2>
+    <p class="section-subtitle">We verzamelen niks. Helemaal niks.</p>
+    <div class="privacy-grid">
+        <div class="privacy-item">
+            <span class="check">&#10003;</span>
+            <span>Alles draait <strong>lokaal</strong> op je apparaat</span>
+        </div>
+        <div class="privacy-item">
+            <span class="check">&#10003;</span>
+            <span><strong>Geen</strong> data verzameling</span>
+        </div>
+        <div class="privacy-item">
+            <span class="check">&#10003;</span>
+            <span><strong>Geen</strong> account nodig</span>
+        </div>
+        <div class="privacy-item">
+            <span class="check">&#10003;</span>
+            <span><strong>Geen</strong> tracking of analytics</span>
+        </div>
+        <div class="privacy-item">
+            <span class="check">&#10003;</span>
+            <span><strong>Geen</strong> cookies</span>
+        </div>
+        <div class="privacy-item">
+            <span class="check">&#10003;</span>
+            <span><strong>Geen</strong> netwerkverzoeken</span>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <h2>Klaar om te beginnen?</h2>
+    <p>Download MP Blocker gratis en zie alleen wat echt is.</p>
+    <a href="https://testflight.apple.com/join/5khqgWcY" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download via TestFlight
+    </a>
+</section>
+
+<!-- Links -->
+<section class="section" style="text-align: center; padding-top: 0;">
+    <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; font-size: 14px;">
+        <a href="https://github.com/TVheld/mp-blocker#privacy" style="color: var(--accent); text-decoration: none;">Privacybeleid</a>
+        <a href="https://github.com/TVheld/mp-blocker#gebruiksvoorwaarden" style="color: var(--accent); text-decoration: none;">Gebruiksvoorwaarden</a>
+        <a href="https://github.com/TVheld/mp-blocker/issues" style="color: var(--accent); text-decoration: none;">Support</a>
+        <a href="https://github.com/TVheld/mp-blocker" style="color: var(--accent); text-decoration: none;">GitHub</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>MP Blocker is niet geaffilieerd met Marktplaats.nl, Adevinta of eBay Inc.</p>
+    <p style="margin-top: 8px;">&copy; 2026 Bart Steinhaus</p>
+</footer>
+
+</body>
+</html>
